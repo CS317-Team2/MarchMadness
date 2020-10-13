@@ -1,5 +1,14 @@
+// Import Matrix
 import Jama.Matrix;
 
+/**
+ * 
+ * Using the first version of Massey's Method 
+ * to find the rating.
+ * 
+ * @author pengs
+ *
+ */
 public class RatingTest {
 
 		public static void main(String[] args) {
