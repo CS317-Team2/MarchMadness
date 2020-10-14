@@ -1,8 +1,8 @@
 // Import File, FileNotFOundException
 import java.io.*;
+
+// Import Array List
 import java.util.ArrayList;
-import java.util.InputMismatchException;
-// Import Scanner
 
 /**
  * 
@@ -15,7 +15,7 @@ public class FileTester {
 
 	/**
 	 * 
-	 * Scanning the file to create it.
+	 * Scanning the file to create data set.
 	 * 
 	 * @param args
 	 */
@@ -30,6 +30,8 @@ public class FileTester {
 			ArrayList<Integer> difference = new ArrayList<Integer>();
 			ArrayList<String> distinctTeams = new ArrayList<String>();
 			ArrayList<Double> teamDifference = new ArrayList<Double>();
+			
+			// While loop to add every value in the array lists
 			while((line = br.readLine()) != null) {
 				String[] values = line.split(",");
 				winners.add(values[1]);
@@ -39,12 +41,15 @@ public class FileTester {
 				difference.add(Integer.parseInt(values[2]) - Integer.parseInt(values[4]));
 			}
 			br.close();
+			
+			// For loop to find any team that has "@"
 			for (int i = 0; i < teams.size(); i++) {
 				String team = teams.get(i);
 				if (team.startsWith("@")) {
 					teams.set(i, team.substring(1));
 				}
 			}
+			
 			for (int i = 0; i < teams.size(); i++) {
 				if(distinctTeams.contains(teams.get(i)) == false) {
 					distinctTeams.add(teams.get(i));
@@ -70,9 +75,15 @@ public class FileTester {
 				System.out.println(distinctTeams.get(i));
 				System.out.println(teamDifference.get(i));
 			}
-		} catch (FileNotFoundException e) {
+		} 
+		
+		// Catch if the file is not found
+		catch (FileNotFoundException e) {
 			e.printStackTrace();
-		} catch (IOException e) {
+		} 
+		
+		// Catch if I/O has an error
+		catch (IOException e) {
 			e.printStackTrace();
 		}
 
