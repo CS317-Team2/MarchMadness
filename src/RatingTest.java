@@ -21,9 +21,7 @@ public class RatingTest {
 			Matrix Xt = X.transpose();
 			Xt.print(10, 2);
 			Matrix M = Xt.times(X);
-
 			Matrix p = Xt.times(y);
-
 			M.set(4, 0, 1.0);
 			M.set(4, 1, 1.0);
 			M.set(4, 2, 1.0);
@@ -32,7 +30,6 @@ public class RatingTest {
 			p.set(4, 0, 0.0);
 			M.print(10, 2);
 			p.print(10, 2);
-
 			Matrix r = M.solve(p);
 			r.print(10, 2);
 		}
