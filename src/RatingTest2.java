@@ -1,7 +1,22 @@
+// Import Matrix
 import Jama.Matrix;
 
+/**
+ * 
+ * Using a second version of Massey's Method to 
+ * find the rating.
+ * 
+ * @author pengs
+ *
+ */
 public class RatingTest2 {
 
+	/**
+	 * 
+	 * 
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		double[][] teams = {{4, -1, -1, -1, -1},
 				{-1, 4, -1, -1, -1}, 
