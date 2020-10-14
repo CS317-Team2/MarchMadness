@@ -1,8 +1,8 @@
 // Import File, FileNotFOundException
 import java.io.*;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 // Import Scanner
-import java.util.Scanner;
 
 /**
  * 
@@ -38,6 +38,7 @@ public class FileTester {
 				teams.add(values[3]);
 				difference.add(Integer.parseInt(values[2]) - Integer.parseInt(values[4]));
 			}
+			br.close();
 			for (int i = 0; i < teams.size(); i++) {
 				String team = teams.get(i);
 				if (team.startsWith("@")) {
@@ -74,6 +75,6 @@ public class FileTester {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
 
+}
 }
