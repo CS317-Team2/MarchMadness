@@ -1,4 +1,3 @@
-
 // Import Matrix
 import Jama.Matrix;
 
@@ -47,4 +46,3 @@ public class RatingTest {
 			r.print(10, 2);
 		}
 }
->>>>>>> add58049ffcfc16af2840a126e91d58e0ddd2ba3
