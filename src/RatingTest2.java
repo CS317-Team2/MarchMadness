@@ -3,8 +3,9 @@ import Jama.Matrix;
 
 /**
  * 
- * Using a second version of Massey's Method to 
- * find the rating.
+ * Using a pre-defined matrix to identify each teams rating. Matrices
+ * were decided based on number of teams and each teams score differential.
+ * A matrix will result with a rating for each team.
  * 
  * @author pengs
  *
@@ -12,7 +13,8 @@ import Jama.Matrix;
 public class RatingTest2 {
 
 	/**
-	 * 
+	 * The main method runs the program. Two matrices are defined
+	 * and the system is solved using the JAMA Matrix package.
 	 * 
 	 * 
 	 * @param args
