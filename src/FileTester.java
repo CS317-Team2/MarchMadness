@@ -64,11 +64,12 @@ public class FileTester {
 				team_2_score.add(second_team_score);
 				System.out.println(team_2_score);
 				
+				String line = sc.next();
 			}
 		}
 		
 		catch(InputMismatchException ex) {
-			System.out.println("Not an integer!");
+			System.out.println("Exception: Find the mismatch input!");
 		}
 		
 		// Closes the scanner
