@@ -20,9 +20,9 @@ public class FileTester {
 	 * @param args
 	 */
 	public static void main(String[] args) throws FileNotFoundException{
-		File file = new File("mcb2019CSV.csv");
+		File file = new File("C:\\Users\\pengs\\eclipse-workspace\\MarchMadness\\data\\mcb2019CSV.csv");
 		Scanner sc = new Scanner(file);
-		
+		sc.close();
 		//TODO finish the file tester
 	}
 
