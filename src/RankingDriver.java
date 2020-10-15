@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 // Import Map
 import java.util.Map;
-
+import java.util.NavigableMap;
 // Import Tree Map
 import java.util.TreeMap;
 
@@ -89,10 +89,13 @@ public class RankingDriver {
 		for (int i = 0; i < r.getRowDimension(); i++) {
 			finalRanks.put(r.get(i, 0), allTeams.get(i));
 		}
-		
+
 		// Loop and print out the final rankings
-		for (Map.Entry<Double, String> entry : finalRanks.entrySet()) {
-		     System.out.println("Rating: " + entry.getKey() + ". Team: " + entry.getValue());
+		NavigableMap<Double, String> reversed = ((TreeMap<Double, String>) finalRanks).descendingMap();
+		int count = 1;
+		for (Map.Entry<Double, String> entry : reversed.entrySet()) {
+		     System.out.println(count + ". " + entry.getValue() + ". Rating: " + entry.getKey());
+		     count++;
 		}
 	}
 	
