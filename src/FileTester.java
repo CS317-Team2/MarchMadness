@@ -17,11 +17,12 @@ public class FileTester {
 	 * 
 	 * Scanning the file to create data set.
 	 * 
-	 * @param args
+	 * @param args the controller
 	 */
 	public static void main(String[] args) {	
 		File file = new File("data/mcb2019CSV.csv");
 		String line = "";
+		
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(file));
 			ArrayList<String> teams = new ArrayList<String>();
