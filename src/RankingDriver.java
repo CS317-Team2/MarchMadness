@@ -12,7 +12,7 @@ import java.io.FileReader;
 
 // Import I/O Exception
 import java.io.IOException;
-
+import java.text.DecimalFormat;
 // Import Array list
 import java.util.ArrayList;
 
@@ -34,13 +34,13 @@ import Jama.Matrix;
  */
 public class RankingDriver {
 	
-	// games is the total amount games and each distinct team
+	// games is the total amount games played
 	private static double[][] games;
 	
-	// differences is the difference between each teams' ranking 
+	// differences is the score difference of each game 
 	private static double[][] differences;
 	
-	// allTeams is the entire team
+	// allTeams is all unique teams
 	private static ArrayList<String> allTeams;
 	
 	// rows is the amount rows in the Matrix
@@ -64,7 +64,7 @@ public class RankingDriver {
 		// Matrix X is created which contains the games 
 		Matrix X = new Matrix(games);
 		
-		// Matrix Y is created which contains the differences of each team
+		// Matrix Y is created which contains the differences of each game
 		Matrix y = new Matrix(differences);
 		
 		// Matrix Xt is a transpose matrix (flipping the matrix diagonally) of X
@@ -73,11 +73,11 @@ public class RankingDriver {
 		Matrix M = Xt.times(X);
 		Matrix p = Xt.times(y);
 		
-		// Loop through Matrix M to set it up
+		// Set bottom row of matrix to all 1's
 		for (int i = 0; i < columns; i++) {
 			M.set(columns - 1, i, 1.0);
 		}
-		
+		//set bottom spot of matrix to 0
 		p.set(columns - 1, 0, 0.0);
 		
 		Matrix r = M.solve(p);
@@ -89,12 +89,13 @@ public class RankingDriver {
 		for (int i = 0; i < r.getRowDimension(); i++) {
 			finalRanks.put(r.get(i, 0), allTeams.get(i));
 		}
-
+		
+		DecimalFormat numberFormat = new DecimalFormat("#.00");
 		// Loop and print out the final rankings
 		NavigableMap<Double, String> reversed = ((TreeMap<Double, String>) finalRanks).descendingMap();
 		int count = 1;
 		for (Map.Entry<Double, String> entry : reversed.entrySet()) {
-		     System.out.println(count + ". " + entry.getValue() + ". Rating: " + entry.getKey());
+		     System.out.println(count + ". " + entry.getValue() + ". Rating: " + numberFormat.format(entry.getKey()));
 		     count++;
 		}
 	}
@@ -117,13 +118,13 @@ public class RankingDriver {
 			// Array list for teams
 			ArrayList<String> teams = new ArrayList<String>();
 			
-			// Array list for winners
+			// Array list for winning team of each game
 			ArrayList<String> winners = new ArrayList<String>();
 			
-			// Array list for losers
+			// Array list for losing team of each game
 			ArrayList<String> losers = new ArrayList<String>();
 			
-			// Array list for the difference
+			// Array list for the score difference of each game
 			ArrayList<Double> difference = new ArrayList<Double>();
 			
 			// Array list for distinct teams
@@ -151,60 +152,53 @@ public class RankingDriver {
 			// Close the Buffered Reader
 			br.close();
 			
-			// Loop through the entire team
+			// Loop through the entire teams to remove any @ symbols
 			for (int i = 0; i < teams.size(); i++) {
 				String team = teams.get(i);
-				
-				// Find if there are any teams that have @
 				if (team.startsWith("@")) {
 					teams.set(i, team.substring(1));
 				}
 			}
 			
-			// Loop through the entire winners
+			// Loop through the entire winners list to remove any @ symbols
 			for (int i = 0; i < winners.size(); i++) {
-				String team = winners.get(i);
-				
+				String team = winners.get(i);		
 				if (team.startsWith("@")) {
 					winners.set(i, team.substring(1));
 				}
 			}
 			
-			// Loop through the entire losers
+			// Loop through the entire losers list to remove any @ symbols
 			for (int i = 0; i < losers.size(); i++) {
 				String team = losers.get(i);
-				
 				if (team.startsWith("@")) {
 					losers.set(i, team.substring(1));
 				}
 			}
 			
-			// Loop through the entire team
+			// Loop through the entire team and only add to distinctTeams 
+			//if the team doesn't already exist
 			for (int i = 0; i < teams.size(); i++) {
-				
-				// Boolean if any team are distinct from each other
 				if(distinctTeams.contains(teams.get(i)) == false) {
 					distinctTeams.add(teams.get(i));
 				}
 			}
-			
+			//set games instance to a totalGames by totalTeams matrix
 			games = new double[totalGames][distinctTeams.size()];
-			
-			differences = new double[difference.size()][1];
-			
-			// Loop through the entire game and append the winners and losers in games
+			//set differences instance to a totalGames by 1 matrix
+			differences = new double[difference.size()][1];			
+			// Loop through all games and add 1 for winner and -1 for loser
 			for (int i = 0; i < totalGames; i++) {
 				String winner = winners.get(i);
 				String loser = losers.get(i);
 				games[i][distinctTeams.indexOf(winner)] = 1;
 				games[i][distinctTeams.indexOf(loser)] = -1;
 			}
-			
-			// Loop through the entire game and append the differences
+			// Loop through all games and add score difference to differences matrix
 			for (int i = 0; i < difference.size(); i++) {
 				differences[i][0] = difference.get(i);
 			}
-			
+			//set rows, columns, and allTeams instances
 			rows = totalGames;
 			columns = distinctTeams.size();
 			allTeams = distinctTeams;
