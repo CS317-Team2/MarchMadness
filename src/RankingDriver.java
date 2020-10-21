@@ -57,6 +57,7 @@ public class RankingDriver {
 	 * @param args There is not controller input
 	 */
 	public static void main(String[] args) {
+		final long START = System.currentTimeMillis();
 		
 		// The method, readData, is called and given a string parameter for it to read the common singular value file
 		readData("data/mcb2019CSV.csv");
@@ -98,6 +99,9 @@ public class RankingDriver {
 		     System.out.println(count + ". " + entry.getValue() + ". Rating: " + numberFormat.format(entry.getKey()));
 		     count++;
 		}
+		final long END = System.currentTimeMillis();
+		System.out.print("Runtime: " + (END - START) + " milliseconds");
+		
 	}
 	
 	/**
